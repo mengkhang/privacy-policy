@@ -8,7 +8,7 @@ Our application bridges WhatsApp Business conversations between
 businesses and their customer support platform. When a customer sends
 a WhatsApp message to a business using our integration, we process:
 
-- **Message content** (text, images, or other media sent by the user)
+- **Message content** (text, and audio sent by the user)
 - **Phone number** (WhatsApp ID of the sender)
 - **Timestamps** (when the message was sent and received)
 - **Message delivery status** (delivered, read, failed)
@@ -23,7 +23,7 @@ We process this data solely to:
 ## How long we keep data
 
 Message content is stored only as long as needed for the activesupport session. Conversation metadata (timestamps, delivery status)
-may be retained for up to [30/90/365] days for operational purposes,
+may be retained for up to 90 days for operational purposes,
 after which it is deleted.
 
 ## Who has access

@@ -143,6 +143,5 @@ We may update this policy as the service evolves. The effective date above will 
 ## Contact
 
 **Kewmann Pte Ltd**
-12 Marina Boulevard, Marina Bay Financial Centre Tower 3, #17-01, Singapore 018982
-Singapore
+12 Marina Boulevard, Marina Bay Financial Centre Tower 3, #17-01, Singapore 018982, Singapore
 Email: info@kewmann.com

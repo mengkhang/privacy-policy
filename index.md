@@ -3,15 +3,18 @@
 **Effective date:** 2026-10-12
 
 **Operator:** Kewmann Pte Ltd
+
 **Registered address:** 12 Marina Boulevard, Marina Bay Financial Centre Tower 3, #17-01, Singapore 018982
+
 **Country:** Singapore
+
 **Privacy contact:** info@kewmann.com
 
 ---
 
 ## What this service does
 
-WA_bridge is a backend integration service that forwards WhatsApp Business messages between end customers and our client's customer support platform (重庆方振科技有限公司 / Chongqing Fangzheng Technology Co., Ltd., "Fangzhen"). When a customer messages Fangzhen on WhatsApp, WA_bridge receives the message from Meta's servers, authenticates and forwards it to Fangzhen's support platform, and delivers the agent's reply back to the customer over WhatsApp.
+WA_bridge is a backend integration service that forwards WhatsApp Business messages between end customers and our client's customer support platform (Chongqing Fangzheng Technology Co., Ltd., "Fangzhen"). When a customer messages Fangzhen on WhatsApp, WA_bridge receives the message from Meta's servers, authenticates and forwards it to Fangzhen's support platform, and delivers the agent's reply back to the customer over WhatsApp.
 
 ---
 
@@ -143,5 +146,9 @@ We may update this policy as the service evolves. The effective date above will 
 ## Contact
 
 **Kewmann Pte Ltd**
-12 Marina Boulevard, Marina Bay Financial Centre Tower 3, #17-01, Singapore 018982, Singapore
+
+12 Marina Boulevard, Marina Bay Financial Centre Tower 3, #17-01, Singapore 018982
+
+Singapore
+
 Email: info@kewmann.com

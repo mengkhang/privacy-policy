@@ -11,24 +11,24 @@
 
 ## What this service does
 
-WA_bridge is a backend integration service that forwards WhatsApp Business messages between end customers and our client's customer support platform (Chongqing Fangzheng Technology Co., Ltd. / 重庆方振科技有限公司, "方振"). When a customer messages 方振 on WhatsApp, WA_bridge receives the message from Meta's servers, authenticates and forwards it to 方振's support platform, and delivers the agent's reply back to the customer over WhatsApp.
+WA_bridge is a backend integration service that forwards WhatsApp Business messages between end customers and our client's customer support platform (重庆方振科技有限公司 / Chongqing Fangzheng Technology Co., Ltd., "Fangzhen"). When a customer messages Fangzhen on WhatsApp, WA_bridge receives the message from Meta's servers, authenticates and forwards it to Fangzhen's support platform, and delivers the agent's reply back to the customer over WhatsApp.
 
 ---
 
 ## Data we collect
 
-When a customer sends a text or voice-note message to 方振's WhatsApp business number, WA_bridge processes the following data:
+When a customer sends a text or voice-note message to Fangzhen's WhatsApp business number, WA_bridge processes the following data:
 
 | Data | Source | What we do with it |
 |---|---|---|
-| Phone number (E.164 format) | Meta's webhook payload | Forward to 方振; store as conversation key |
-| WhatsApp message ID (`wamid`) | Meta's webhook payload | Use for deduplication; forward to 方振 |
-| Message timestamp | Meta's webhook payload | Forward to 方振 to order messages chronologically |
+| Phone number (E.164 format) | Meta's webhook payload | Forward to Fangzhen; store as conversation key |
+| WhatsApp message ID (`wamid`) | Meta's webhook payload | Use for deduplication; forward to Fangzhen |
+| Message timestamp | Meta's webhook payload | Forward to Fangzhen to order messages chronologically |
 | Message direction (inbound / outbound) | WA_bridge | For our own delivery auditing |
 | Message type (text / audio) | Meta's webhook payload | Determines processing path |
-| Text message body | Meta's webhook payload | Forward to 方振 (see "Text body retention" below) |
-| Voice note (audio file) | Meta's Media API | Downloaded, forwarded to 方振, not stored on our side |
-| Customer display name (if available) | Meta's webhook payload | Forward to 方振; store as conversation metadata |
+| Text message body | Meta's webhook payload | Forward to Fangzhen (see "Text body retention" below) |
+| Voice note (audio file) | Meta's Media API | Downloaded, forwarded to Fangzhen, not stored on our side |
+| Customer display name (if available) | Meta's webhook payload | Forward to Fangzhen; store as conversation metadata |
 
 We do not collect or process: payment data, location data, contacts, calendar, device identifiers, or any data beyond what Meta includes in the WhatsApp Business webhook payload.
 
@@ -38,12 +38,12 @@ We do not collect or process: payment data, location data, contacts, calendar, d
 
 We process the data only to:
 
-1. **Forward messages** between Meta's WhatsApp platform and 方振's customer support platform.
+1. **Forward messages** between Meta's WhatsApp platform and Fangzhen's customer support platform.
 2. **Prevent duplicate processing** — the WhatsApp message ID is used to ensure the same inbound message is not processed twice when Meta retries delivery.
-3. **Retry delivery** during transient platform outages — a short-lived queue holds text bodies when 方振 is temporarily unreachable.
+3. **Retry delivery** during transient platform outages — a short-lived queue holds text bodies when Fangzhen is temporarily unreachable.
 4. **Audit delivery status** — message IDs and timestamps let us confirm whether outbound messages reached Meta successfully.
 
-We do not use this data for marketing, advertising, profiling, automated decision-making, or any purpose beyond delivering the conversation between the customer and 方振.
+We do not use this data for marketing, advertising, profiling, automated decision-making, or any purpose beyond delivering the conversation between the customer and Fangzhen.
 
 ---
 
@@ -55,13 +55,13 @@ Conversation records (phone number, customer display name) and message metadata 
 
 ### Text message body — short-lived retry buffer only
 
-When 方振's platform is temporarily unreachable, WA_bridge queues the text message body in a retry buffer (the "outbox") until delivery succeeds or the entry expires. Outbox entries are deleted after `OUTBOX_MAX_AGE_DAYS` (currently 1 day). Expired entries are logged before deletion for operational auditing.
+When Fangzhen's platform is temporarily unreachable, WA_bridge queues the text message body in a retry buffer (the "outbox") until delivery succeeds or the entry expires. Outbox entries are deleted after `OUTBOX_MAX_AGE_DAYS` (currently 1 day). Expired entries are logged before deletion for operational auditing.
 
-Once 方振 acknowledges receipt of a queued message, the text body is removed from the outbox immediately.
+Once Fangzhen acknowledges receipt of a queued message, the text body is removed from the outbox immediately.
 
 ### Voice notes (audio) — never stored
 
-Audio files are downloaded from Meta's servers via the WhatsApp Business Media API, encoded in memory, forwarded to 方振's support platform, and then discarded. We do not write audio bytes to disk and do not retain them after the forward call completes. The Meta `media_id` reference is kept in the outbox for the same 1-day window as text bodies, then deleted.
+Audio files are downloaded from Meta's servers via the WhatsApp Business Media API, encoded in memory, forwarded to Fangzhen's support platform, and then discarded. We do not write audio bytes to disk and do not retain them after the forward call completes. The Meta `media_id` reference is kept in the outbox for the same 1-day window as text bodies, then deleted.
 
 ### Deletion summary
 
@@ -80,7 +80,7 @@ Audio files are downloaded from Meta's servers via the WhatsApp Business Media A
 
 We share the data with **one party**:
 
-**Chongqing Fangzheng Technology Co., Ltd. (重庆方振科技有限公司)** ("方振"), our client and the operator of the customer support platform. 方振 receives the message content (phone, display name, text body or audio file, timestamp, message ID) so their support agents can reply to the customer. 方振's handling of the data is governed by 方振's own privacy policy; please also contact 方振 if you wish to delete your data from their system.
+**Fangzhen** (重庆方振科技有限公司 / Chongqing Fangzheng Technology Co., Ltd.), our client and the operator of the customer support platform. Fangzhen receives the message content (phone, display name, text body or audio file, timestamp, message ID) so their support agents can reply to the customer. Fangzhen's handling of the data is governed by Fangzhen's own privacy policy; please also contact Fangzhen if you wish to delete your data from their system.
 
 We do not share WhatsApp Business data with any other party. We do not sell, rent, or trade this data.
 
@@ -88,9 +88,9 @@ We do not share WhatsApp Business data with any other party. We do not sell, ren
 
 ## Cross-border data transfer
 
-WA_bridge is operated by Kewmann Pte Ltd in Singapore. We forward messages to 方振, which is operated from China. By messaging 方振 on WhatsApp, you acknowledge that your message content (including phone number, text body, and any voice note) will be transferred from Meta's infrastructure (location varies) to our server in Singapore, then forwarded to 方振 in China for agent reply.
+WA_bridge is operated by Kewmann Pte Ltd in Singapore. We forward messages to Fangzhen, which is operated from China. By messaging Fangzhen on WhatsApp, you acknowledge that your message content (including phone number, text body, and any voice note) will be transferred from Meta's infrastructure (location varies) to our server in Singapore, then forwarded to Fangzhen in China for agent reply.
 
-We rely on WhatsApp's standard data flow (Meta → our webhook → 方振) for this transfer. We do not perform any additional cross-border transfer beyond what is described in this paragraph.
+We rely on WhatsApp's standard data flow (Meta → our webhook → Fangzhen) for this transfer. We do not perform any additional cross-border transfer beyond what is described in this paragraph.
 
 ---
 
@@ -98,7 +98,7 @@ We rely on WhatsApp's standard data flow (Meta → our webhook → 方振) for t
 
 - All webhook traffic to and from WA_bridge uses HTTPS (TLS).
 - Inbound webhook requests from Meta are verified using the `X-Hub-Signature-256` HMAC-SHA256 signature with the Meta app secret. Requests with missing or invalid signatures are rejected.
-- Outbound webhook requests to 方振 are signed using HMAC-SHA256 with a shared secret; recipients verify the signature before accepting the payload.
+- Outbound webhook requests to Fangzhen are signed using HMAC-SHA256 with a shared secret; recipients verify the signature before accepting the payload.
 - Database access is restricted to authenticated operators via the bridge's API and ops tooling.
 - We do not log message bodies in plaintext; routine logs may contain message IDs, phone hashes, and delivery status, but not message content.
 
@@ -118,7 +118,7 @@ Depending on your jurisdiction, you may have rights to:
 
 To exercise any of these rights, contact us at **info@kewmann.com**.
 
-For data held by 方振's support platform, please also contact 方振's privacy team — we cannot delete data that we did not receive from Meta or that has been forwarded to 方振.
+For data held by Fangzhen's support platform, please also contact Fangzhen's privacy team — we cannot delete data that we did not receive from Meta or that has been forwarded to Fangzhen.
 
 ---
 
@@ -130,13 +130,7 @@ Send an email to **info@kewmann.com** with:
 
 We will delete all WA_bridge records associated with that phone number — conversation records, message metadata, and any queued retry rows — within **30 days** of receiving your request, and reply to confirm.
 
-Note: this deletes our records only. 方振's customer support platform holds a copy of the conversation from the moment your message was forwarded. To delete from their system, contact 方振 directly.
-
----
-
-## Children
-
-WA_bridge is a backend service for adult customer support. We do not knowingly collect data from individuals under the age of 16. If we receive such data inadvertently (the customer self-identifies as a minor or we determine a phone number belongs to a minor), we delete it on request without further processing.
+Note: this deletes our records only. Fangzhen's customer support platform holds a copy of the conversation from the moment your message was forwarded. To delete from their system, contact Fangzhen directly.
 
 ---
 

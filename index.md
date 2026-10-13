@@ -8,7 +8,7 @@
 
 **Country:** Singapore
 
-**Privacy contact:** info@kewmann.com
+**Privacy contact:** support@kewmann.com
 
 ---
 
@@ -119,7 +119,7 @@ Depending on your jurisdiction, you may have rights to:
 - **Withdraw consent** and stop further processing
 - **Lodge a complaint** with a data protection authority
 
-To exercise any of these rights, contact us at **info@kewmann.com**.
+To exercise any of these rights, contact us at **support@kewmann.com**.
 
 For data held by Fangzhen's support platform, please also contact Fangzhen's privacy team — we cannot delete data that we did not receive from Meta or that has been forwarded to Fangzhen.
 
@@ -127,7 +127,7 @@ For data held by Fangzhen's support platform, please also contact Fangzhen's pri
 
 ## How to request deletion
 
-Send an email to **info@kewmann.com** with:
+Send an email to **support@kewmann.com** with:
 
 - The phone number you messaged us from (E.164 format, e.g. `+8613xxxxxxxxx`)
 
@@ -151,4 +151,4 @@ We may update this policy as the service evolves. The effective date above will 
 
 Singapore
 
-Email: info@kewmann.com
+Email: support@kewmann.com
